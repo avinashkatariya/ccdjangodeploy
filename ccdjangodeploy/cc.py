@@ -27,11 +27,10 @@ def deploy():
 
 	os.system(". ~/djangoEnv/bin/activate && pip install -r "+pdir+"/requirements.txt && deactivate")
 
-	os.system('echo "\n[program:gunicorn]\ndirectory='+pdir+'\ncommand=/home/ubuntu/djangoEnv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/'+pdir+'/app.sock '+projectDir+'.wsgi:application\nautostart=true\nautorestart=true\n\n[group:guni]\nprograms:gunicorn" | sudo tee -a /etc/supervisor/conf.d/gunicorn.conf')
+	os.system('echo "\n[program:gunicorn]\ndirectory='+pdir+'\ncommand=/home/ubuntu/djangoEnv/bin/gunicorn --workers 3 --bind unix:'+pdir+'/app.sock '+projectDir+'.wsgi:application\nautostart=true\nautorestart=true\n\n[group:guni]\nprograms:gunicorn" | sudo tee -a /etc/supervisor/conf.d/gunicorn.conf')
 
 	os.system( "'\nserver{\n\tlisten 80;\n\tlocation /{\n\t\tinclude proxy_params;\n\t\tproxy_pass http://unix:"+pdir+"/app.sock;\n\t}\n\tlocation /static/{\n\t\tautoindex on;\n\t\talias "+pdir+"/static/;}\n\tlocation /media/ {\n\t\tautoindex on;\n\t\talias "+pdir+"/media/;  \n\t}\n}'| sudo tee -a /etc/nginx/sites-available/django.conf")
 
 	os.system("sudo ln /etc/nginx/sites-available/django.conf /etc/nginx/sites-enabled && sudo rm default")
 
 	os.system("sudo supervisorctl reread && sudo supervisorctl update && sudo service nginx restart")
- 
