@@ -31,7 +31,7 @@ def deploy():
 
 	os.system( "echo '\nserver{\n\tlisten 80;\n\tlocation /{\n\t\tinclude proxy_params;\n\t\tproxy_pass http://unix:"+pdir+"/app.sock;\n\t}\n\tlocation /static/{\n\t\tautoindex on;\n\t\talias "+pdir+"/static/;}\n\tlocation /media/ {\n\t\tautoindex on;\n\t\talias "+pdir+"/media/;  \n\t}\n}' | sudo tee -a /etc/nginx/sites-available/django.conf")
 
-	os.system("sudo ln /etc/nginx/sites-available/django.conf /etc/nginx/sites-enabled && sudo rm default")
+	os.system("sudo ln /etc/nginx/sites-available/django.conf /etc/nginx/sites-enabled && sudo rm /etc/nginx/sites-enabled/default")
 
 	os.system("sudo supervisorctl reread && sudo supervisorctl update")
 	
