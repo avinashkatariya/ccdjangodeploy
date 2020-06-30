@@ -33,4 +33,11 @@ def deploy():
 
 	os.system("sudo ln /etc/nginx/sites-available/django.conf /etc/nginx/sites-enabled && sudo rm default")
 
-	os.system("sudo supervisorctl reread && sudo supervisorctl update && sudo service nginx restart")
+	os.system("sudo supervisorctl reread && sudo supervisorctl update")
+	
+	os.system("sudo supervisorctl reload")
+ 
+	os.system("sudo service nginx restart")
+ 
+	print("Django site deployment successful")
+	
