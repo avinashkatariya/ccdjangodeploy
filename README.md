@@ -1,4 +1,4 @@
-# Weather Reporter
+# CCDD
 
 A Python package to deploy django website on any linux based cloud instance
 

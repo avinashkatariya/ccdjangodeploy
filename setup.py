@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="ccdjangodeploy",
-    version="1.0.1",
+    version="1.0.0",
     description="A Python package to deploy django project on any linux based system.",
     long_description=readme(),
     long_description_content_type="text/markdown",
