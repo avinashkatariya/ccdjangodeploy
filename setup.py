@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="ccdjangodeploy",
-    version="1.1.1",
+    version="1.1.2",
     description="A Python package to deploy django project on any linux based system.",
     long_description=readme(),
     long_description_content_type="text/markdown",
@@ -27,6 +27,7 @@ setup(
     entry_points={
         "console_scripts": [
             "ccdd=ccdjangodeploy.cli:main",
+            "updateccdd=ccdjangodeploy.update:update"
         ]
     },
 )
